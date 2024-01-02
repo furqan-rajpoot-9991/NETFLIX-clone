@@ -1,36 +1,35 @@
-import React from 'react'
 
-import Navbar from './components/Navbar'
-
-import {
-    Route,
-    Routes,
-} from "react-router-dom";
-import Home from './pages/home';
-import Signup from './pages/Signup';
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './Components/Navbar';
 import { AuthContextProvider } from './context/AuthContext';
-import Login from './pages/Login';
-import ProtectedRoute from './components/ProtectedRoute';
+import Home from './pages/Home';
+import Login from './pages/LogIn'
 
+import Signup from './pages/SignUp';
+import Account from './pages/Account';
+import ProtectedRoute from './Components/ProtectedRoute';
 
-const App = () => {
+function App() {
   return (
-      <>
-{/* <div>adsffsd</div> */}
-            
-<AuthContextProvider>
+    <>
+      <AuthContextProvider> 
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={< Login/>} />
           <Route path='/signup' element={<Signup />} />
-         
+          <Route
+            path='/account'
+            element={
+              <ProtectedRoute>
+                <Account />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </AuthContextProvider>
-
- 
     </>
-  )
+  );
 }
 
-export default App
+export default App;
